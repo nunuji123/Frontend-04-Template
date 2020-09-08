@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>settimeout</title>
+		<style>
+			#container {
+				display: flex;
+				width: 100%;
+			}
+			.cell {
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				visibility: none;
+				background-color: grey;
+				margin-right: 30px;
+			}
+			.red.light {
+				background-color: red;
+			}
+			.light.yellow {
+				background-color: yellow;
+			}
+			.light.green {
+				background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+	</body>
+	<script type="text/javascript">
+		//  创建三个元素
+		const colors = ['green', 'red', 'yellow']
+		for (const color of colors) {
+			const child = document.createElement('div')
+			child.classList.add('cell')
+			child.classList.add(color)
+			document.getElementById('container').appendChild(child)
+		}
+		// 绿灯
+		function green() {
+			const colorBoxes = document.getElementsByClassName('cell')
+			for (const colorBox of colorBoxes) {
+				colorBox.classList.remove('light')
+			}
+			document.getElementsByClassName('green')[0].classList.add('light')
+		}
+		function yellow() {
+			const colorBoxes = document.getElementsByClassName('cell')
+			for (const colorBox of colorBoxes) {
+				colorBox.classList.remove('light')
+			}
+			document.getElementsByClassName('yellow')[0].classList.add('light')
+		}
+		function red() {
+			const colorBoxes = document.getElementsByClassName('cell')
+			for (const colorBox of colorBoxes) {
+				colorBox.classList.remove('light')
+			}
+			document.getElementsByClassName('red')[0].classList.add('light')
+		}
+
+		function go() {
+			red()
+			setTimeout(() => {
+				yellow()
+				setTimeout(() => {
+					green()
+					setTimeout(() => {
+						go()
+					}, 2000)
+				}, 2000)
+			}, 2000)
+		}
+		// go()
+	</script>
+</html>
